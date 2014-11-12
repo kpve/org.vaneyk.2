@@ -16,10 +16,15 @@
 
     <artifactId>vaneyk-commons-pom</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <project.root.dir>${basedir}</project.root.dir>
+    </properties>
     
     <modules>
         <module>parent</module>
         <module>test</module>
+        <module>spring-data</module>
     </modules>
     
 </project>

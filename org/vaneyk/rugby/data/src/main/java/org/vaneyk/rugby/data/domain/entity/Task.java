@@ -1,84 +1,105 @@
 package org.vaneyk.rugby.data.domain.entity;
 
-import java.util.UUID;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.vaneyk.commons.spring.data.mongo.CounterService;
+import org.vaneyk.commons.spring.data.mongo.MetaData;
 
-@Document( collection="tasks" )
+// TODO revisit mutability
+
+@Document( collection = Task.COLLECTION_NAME )
 public class Task
 {
-    @Value("#root.tasks.qty ?: 0")
-    int order;
-    @Indexed
-    String name;
-    @Version
-    long version;
+    static final String COLLECTION_NAME = "tasks";
+
+    @Transient private CounterService counterService;
     
-    @DBRef
-    Story story;
-
-    public Task()
-    {
-        this( null, null, 1 );
-    }
-
-    public Task( String name, Story story, long version )
-    {
-        this( null, name, story, version );
-    }
+    @Indexed Long   id;
+    @Indexed String name;
+             String storyId;
+    @Version Long   version;
     
     @PersistenceConstructor
-    public Task( String id, String name, Story story, long version )
+    public Task( Long id, String name, @Value(MetaData.ROOT_ID_VALUE_EXPRESSION)String storyId, Long version )
     {
-        this.id = id;
-        this.name = name;
-        this.story = story;
-        this.version = version;
+        this( null, id, name, storyId, version );
     }
     
-    public String getId()
+    public Task( CounterService counterService, Long id, String name, String storyId, Long version )
+    {
+        this.setCounterService( counterService );
+        
+        this.setId( id );
+        this.setName( name );
+        this.setVersion( version );
+        this.setStoryId( storyId );
+    }
+
+    public CounterService getCounterService()
+    {
+        return this.counterService;
+    }
+
+    public void setCounterService( CounterService counterService )
+    {
+        this.counterService = counterService;
+    }
+    
+    public Long getId()
     {
         return this.id;
     }
 
-    public void setId( String id )
+    public void setId( Long id )
     {
-        this.id = id;
+        this.id = ( id == null ? this.counterService.getNextSequenceValue( Task.COLLECTION_NAME ) : id );
     }
 
     public String getName()
     {
-        return this. name;
+        return this.name;
     }
 
-    public void setName( String name )
+    public void setName( @NotNull String name )
     {
         this.name = name;
     }
 
-    public Story getStory()
+    public Long getVersion()
     {
-        return this.story;
+        return this.version;
     }
 
-    public void setStory( Story story )
+    public void setVersion( Long version )
     {
-        this.story = story;
+        this.version = version;
+    }
+
+    public String getStoryId()
+    {
+        return this.storyId;
+    }
+
+    public void setStoryId( String storyId )
+    {
+        this.storyId = storyId;
     }
 
     @Override
     public String toString()
     {
         String toString = new ToStringBuilder( this )
+                                  .append( this.counterService )
                                   .append( this.id )
                                   .append( this.name )
-                                  .append( ( this. story == null ? "[no story]" : this.story.id ) )
+                                  .append( this.storyId )
                                   .toString();
         
         return toString;

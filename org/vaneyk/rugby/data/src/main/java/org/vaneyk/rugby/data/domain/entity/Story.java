@@ -3,38 +3,28 @@ package org.vaneyk.rugby.data.domain.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.vaneyk.commons.spring.data.mongo.CounterService;
 
 //@Component
 @Document( collection="stories" )
 public class Story
 {
-    @Id
-    String id;
-    @Indexed
-    String name;
-    @Version
-    long version;
-    
-    List<Task> tasks;
-    
-    public Story()
-    {
-        this( null, null, null, 1 );
-    }
-
-    public Story( String name, List<Task> tasks, long version )
-    {
-        this( null, name, tasks, version );
-    }
+    @Id      String     id;
+    @Indexed String     name;
+             List<Task> tasks;
+    @Version Long       version;
     
     @PersistenceConstructor
-    public Story( String id, String name, List<Task> tasks, long version )
+    public Story( String id, String name, List<Task> tasks, Long version )
     {
         this.setId( id );
         this.setName( name );
@@ -57,7 +47,7 @@ public class Story
         return this.name;
     }
 
-    public void setName( String name )
+    public void setName( @NotNull String name )
     {
         this.name = name;
     }
@@ -72,12 +62,12 @@ public class Story
         this.tasks = ( tasks == null ? new ArrayList<Task>() : tasks );
     }
 
-    public long getVersion()
+    public Long getVersion()
     {
         return this.version;
     }
 
-    public void setVersion( long version )
+    public void setVersion( Long version )
     {
         this.version = version;
     }
@@ -89,6 +79,7 @@ public class Story
                                   .append( this.id )
                                   .append( this.name )
                                   .append( this.tasks )
+                                  .append( this.version )
                                   .toString();
         
         return toString;
