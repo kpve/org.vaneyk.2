@@ -1,0 +1,452 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <!-- NOTE: 
+         This pom file is the root of the project object model inheritance chain.  It contains standard information and behaviors         
+         most standard projects should use to promote standardization, consistency, compatibility and so on.  These are nice things but there are
+         limits to what can be achieved without becoming overbearing on project implementations (heavy, constrictive etc.) The goal should be
+         to provide core value but allow project the flexibility to do deviate and supplement with good reason.  
+         
+         Some of the more important things included are:
+           - common third party dependency versions: This is only for commonly used or wide impacting third party dependencies. Things like apache commons, testng, spring, jaxb, or 
+                                                     libraries that impact compatibility across code bases (think serialization, caching etc.)
+                                                     This is nice because it creates a foundation for common behavior, compatibility, etc across standard code bases.
+           - maven plugin configurations           : This is nice because it helps create standard projects that look and act the same that everyone can work with pretty easily :)
+           - maven profiles                        : Same as maven plugin configs...
+           
+         Some important things that are NOT included are:
+           - first party dependency versions:  including them here would create a circular dependency! not fun.
+         
+         Some important nuances/patterns to keep in mind/follow:
+           - profiles id's are name spaced  : Why? because maven treats profiles different from other aspects of a pom. Specifically, profiles are not inherited!
+                                              If you define a profile with the same id in a parent and a child pom BOTH will be invoked (parent fist then child).
+     
+         TODO more hot air goes here LOL....
+     -->
+     
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.vaneyk</groupId>
+    <artifactId>vaneyk-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+<!-- TODO
+    <scm>
+    </scm>
+-->
+
+    <properties>
+
+        <!-- third party dependency versions -->
+        <version.java>1.8</version.java>
+
+        <!-- behaviors -->
+        <!--     standard  -->
+        <project.root.dir>[PLEASE DEFINE THIS PROPERTY IN YOUR PROJECT'S PARENT POM]</project.root.dir>
+        <project.root.lib.dir>${project.root.dir}/lib</project.root.lib.dir>
+        <project.root.lib.sources.dir>${project.root.lib.dir}/sources</project.root.lib.sources.dir>
+        <standard.install.location>/application</standard.install.location>
+        
+        <!--     project -->        
+        <project.build.dependency-directory>${project.build.directory}/dependency/</project.build.dependency-directory>
+        <project.build.dependency.cache-directory>${project.build.directory}/dependency/cache</project.build.dependency.cache-directory>
+        <project.build.dependency.report-list-file>${project.build.dependency-directory}/dependency.list.txt</project.build.dependency.report-list-file>
+        <project.build.dependency.report-tree-file>${project.build.dependency-directory}/dependency.tree.txt</project.build.dependency.report-tree-file>
+        
+        <!--     profiles NOTE: profiles use naming to prevent collisions with child projects since maven profiles are not cumulative and can't be overridden -->   
+        <org.vaneyk.parent.compile-resources.profile-activation>true</org.vaneyk.parent.compile-resources.profile-activation>    <!-- NOTE: most projects will want this profile to run but for those that don't (such as archetypes that have special resource copying/filtering rules) set this property to false -->
+    </properties>
+
+<!-- TODO
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>    
+-->
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+        </plugins>
+    </reporting>
+    
+    <!--  NOTE: in order to keep builds consistent all plugin versions should be explicitly listed -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>        
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+<!-- TODO add code coverage, pmd etc -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>help</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <target>
+                                <concat>
+                                    <fileset file="help.txt" />
+                                </concat>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4.1</version>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <includeEmptyDirs>true</includeEmptyDirs>
+                        <nonFilteredFileExtensions>
+                            <!-- maven filtering can unintentionally change the contents of binary files, so list file extensions to exclude here -->
+                            <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>swf</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>jks</nonFilteredFileExtension>
+                            <nonFilteredFileExtensions>jpg</nonFilteredFileExtensions>
+                            <nonFilteredFileExtensions>jpeg</nonFilteredFileExtensions>
+                            <nonFilteredFileExtensions>png</nonFilteredFileExtensions>
+                            <nonFilteredFileExtensions>gif</nonFilteredFileExtensions>
+                            <nonFilteredFileExtensions>pdf</nonFilteredFileExtensions>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>copy-src-main-resources-to-classes</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${project.build.sourceDirectory}</directory>
+                                        <excludes>
+                                            <exclude>**/*.java</exclude>
+                                        </excludes>
+                                    </resource>
+                                </resources>
+                                <includeEmptyDirs>true</includeEmptyDirs>
+                                <overwrite>true</overwrite>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>copy-src-test-resources-to-test-classes</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${project.build.testSourceDirectory}</directory>
+                                        <excludes>
+                                            <exclude>**/*.java</exclude>
+                                        </excludes>
+                                    </resource>
+                                </resources>
+                                <includeEmptyDirs>true</includeEmptyDirs>
+                                <overwrite>true</overwrite>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuration>
+                        <source>${version.java}</source>
+                        <target>${version.java}</target>
+                        <debug>true</debug>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.14.1</version>
+                    <configuration>
+                        <!-- white list just UnitTest pattern so we don't have to black list everything else - such as IntegrationTest, PerformanceTest etc.  :) -->
+                        <includes>
+                            <include>**/*UnitTest.java</include>
+                        </includes>
+                    </configuration>
+                        <!--  NOTE:
+                                - these executions seem to allow surefire to run testng and junit tests in one pass :)
+                                - see references for more info:
+                                  - http://jira.codehaus.org/browse/SUREFIRE-377
+                        -->
+                    <executions>
+                        <execution>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>    
+                                <testNGArtifactName>none:none</testNGArtifactName>
+                                <reportsDirectory>${project.build.directory}/surefire-reports/testng</reportsDirectory>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>test-testng</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>    
+                                <junitArtifactName>none:none</junitArtifactName>
+                                <reportsDirectory>${project.build.directory}/surefire-reports/junit</reportsDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.ant</groupId>
+                            <artifactId>ant-nodeps</artifactId>
+                            <version>1.8.1</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>ant-contrib</groupId>
+                            <artifactId>ant-contrib</artifactId>
+                            <version>1.0b3</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>ant</groupId>
+                                <artifactId>ant</artifactId>
+                            </exclusion>
+                        </exclusions>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+  <!-- 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <rulesets>
+                            <ruleset>rulesets/java/TODO.xml</ruleset>
+                        </rulesets>
+                    </configuration>
+                </plugin>
+-->
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>org.vaneyk.parent.environment-support</id>
+            <activation>
+                <property>
+                    <name>environment-support</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <property environment="env" />
+                                        <echoproperties />
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>org.vaneyk.parent.dependency-support</id>
+            <activation>
+                <property>
+                    <name>dependency-support</name>
+                </property>
+<!--  TODO consider using missing dir in addition to property so that this runs initially as well as if the dependency cache has been cleaned             
+                <file>
+                    <missing>${project.build.dependency.cache-directory}</missing>
+                </file>
+-->                
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.5</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.build.dependency-directory}</directory>
+                                    <directory>${project.root.lib.dir}</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>        
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.8</version>
+                        <executions>
+                            <!--  TODO can the cache-dependencies and cache-depedencies-sources steps be combined? -->
+                            <execution>
+                                <id>cache-dependencies</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.dependency.cache-directory}</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>cache-dependencies-sources</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.dependency.cache-directory}</outputDirectory>
+                                    <classifier>sources</classifier>
+                                    <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>generate-dependency-report-list</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>list</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>${project.build.dependency.report-list-file}</outputFile>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>generate-dependency-report-tree</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>tree</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>${project.build.dependency.report-tree-file}</outputFile>
+                                    <outputType>text</outputType>
+                                </configuration>
+                            </execution>                            
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies-to-project-lib-directory</id>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <target>
+                                        <!--  TODO optimize this, currently copies dependencies for all modules each time a module is built -->
+                                        <!-- after all the child modules have fetched their dependencies, collect them all in one convenient project lib directory -->
+                                        <mkdir dir="${project.root.lib.dir}" />
+                                        <delete dir="${project.root.lib.dir}" />
+                                        <mkdir dir="${project.root.lib.dir}" />
+                                        <copy todir="${project.root.lib.dir}" flatten="true" overwrite="true" failonerror="false">
+                                            <fileset dir="${project.root.dir}">
+                                                <include name="**/target/dependency/cache/**/*.jar" />
+                                                <exclude name="**/target/dependency/cache/**/*-sources.jar" />
+                                            </fileset>
+                                        </copy>
+                                        <mkdir dir="${project.root.lib.sources.dir}" />
+                                        <copy todir="${project.root.lib.sources.dir}" flatten="true" overwrite="true" failonerror="false">
+                                            <fileset dir="${project.root.dir}">
+                                                <include name="**/target/dependency/cache/**/*-sources.jar" />
+                                            </fileset>
+                                        </copy>                                        
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>             
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>org.vaneyk.parent.publish-sources</id>
+            <activation>
+                <property>
+                    <name>publish-sources</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>    
+</project>
