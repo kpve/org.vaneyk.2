@@ -13,7 +13,7 @@ import org.vaneyk.rugby.data.service.HelloWorldService;
 
 @Configuration
 @Profile( "development" )
-@PropertySource( "classpath:application.development.properties" )
+@PropertySource( "classpath:application-development.properties" )
 public class Development 
 {
     @Bean

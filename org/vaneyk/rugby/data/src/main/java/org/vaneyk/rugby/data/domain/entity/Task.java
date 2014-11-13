@@ -26,6 +26,11 @@ public class Task
              String storyId;
     @Version Long   version;
     
+    // TODO revisit, required by spring framework
+    public Task()
+    {
+    }
+    
     @PersistenceConstructor
     public Task( Long id, String name, @Value(MetaData.ROOT_ID_VALUE_EXPRESSION)String storyId, Long version )
     {

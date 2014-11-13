@@ -10,7 +10,7 @@
 	<classpathentry kind="lib" path="lib/mongo-java-driver-2.12.1.jar" sourcepath="C:/Users/ken/.m2/repository/org/mongodb/mongo-java-driver/2.12.1/mongo-java-driver-2.12.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/spring-aop-3.2.10.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-aop/3.2.10.RELEASE/spring-aop-3.2.10.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/spring-beans-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-3.2.10.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-beans/3.2.10.RELEASE/spring-beans-3.2.10.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-context-3.2.10.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-core-3.2.10.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-data-commons-1.8.4.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/data/spring-data-commons/1.8.4.RELEASE/spring-data-commons-1.8.4.RELEASE-sources.jar"/>

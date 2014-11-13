@@ -8,13 +8,12 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.vaneyk.commons.spring.data.mongo.CounterService;
 
-//@Component
+//TODO revisit mutability
+
 @Document( collection="stories" )
 public class Story
 {
@@ -22,6 +21,11 @@ public class Story
     @Indexed String     name;
              List<Task> tasks;
     @Version Long       version;
+
+    // TODO revisit, required by spring framework
+    public Story()
+    {
+    }
     
     @PersistenceConstructor
     public Story( String id, String name, List<Task> tasks, Long version )

@@ -1,7 +1,5 @@
 package org.vaneyk.commons.spring.data.mongo;
 
-import java.util.Set;
-
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
