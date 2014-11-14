@@ -19,6 +19,8 @@
     
     <properties>
         <project.root.dir>${basedir}</project.root.dir>
+        <org.springframework.boot.configuration.mainClass>org.vaneyk.rugby.web.Application</org.springframework.boot.configuration.mainClass>
+        <org.springframework.boot.configuration.jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8008</org.springframework.boot.configuration.jvmArguments>
     </properties>
     
     <dependencies>
@@ -145,20 +147,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.1.9.RELEASE</version>
-                <configuration>
-                    <mainClass>org.vaneyk.rugby.web.Application</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
     
-</project>
 </project>

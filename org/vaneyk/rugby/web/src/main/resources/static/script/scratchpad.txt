@@ -1,0 +1,35 @@
+var app = angular.module( "app", [] );
+
+var helloController = function( $scope )
+       {
+           $scope.helloTo = {};
+           $scope.helloTo.title = "World, AngularJS";
+       } );
+
+app.controller( "HelloController", helloController );
+
+
+app.factory('search', ['$http', function($http) {
+
+    var search = {};
+
+    var query = 'TODO';
+    var results = [ { resourceType: 'node',    resource: [ 'node1','node2' ] },
+		            { resourceType: 'service', resource: [ 'service1', 'service2' ] } ];
+
+    search.setQuery = function(newQuery) {
+        query = newQuery;
+    }
+    
+    search.getQuery = function (id) {
+        return query;  // TODO supplied query
+    };
+
+    search.getResults = function (id) {
+        return results;   //TODO $http.get(url...);
+    };
+
+    return search;
+}]);
+
+

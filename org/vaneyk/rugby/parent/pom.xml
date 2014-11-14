@@ -18,4 +18,34 @@
     <artifactId>vaneyk-rugby-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+    
+    <properties>
+        <org.springframework.boot.configuration.mainClass>[Pleas set property 'org.springframework.boot.configuration.mainClass']</org.springframework.boot.configuration.mainClass>
+        <org.springframework.boot.configuration.jvmArguments></org.springframework.boot.configuration.jvmArguments>
+    </properties>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+	            <plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	                <version>1.1.9.RELEASE</version>
+	                <configuration>
+	                    <mainClass>${org.springframework.boot.configuration.mainClass}</mainClass>
+	                    <jvmArguments>${org.springframework.boot.configuration.jvmArguments}</jvmArguments>
+	                </configuration>
+	                <executions>
+	                    <execution>
+	                        <goals>
+	                            <goal>repackage</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	        </plugins>
+        </pluginManagement>
+    </build>
+    
+    
 </project>
