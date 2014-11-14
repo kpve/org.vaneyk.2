@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaneyk.commons.spring.data.mongo.CounterService;
-import org.vaneyk.rugby.data.domain.entity.Story;
-import org.vaneyk.rugby.data.domain.entity.Task;
+import org.vaneyk.rugby.common.domain.Story;
+import org.vaneyk.rugby.common.domain.Task;
 import org.vaneyk.rugby.data.domain.repository.StoryRepository;
 
 @Service

@@ -1,12 +1,15 @@
-package org.vaneyk.rugby.data.api.controller;
+package org.vaneyk.rugby.web.controller;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,24 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.vaneyk.rugby.common.domain.Story;
-import org.vaneyk.rugby.data.domain.repository.StoryRepository;
 
 @Controller
-@RequestMapping( "/story" )
 public class StoryController
 {
-    private StoryRepository storyRepository;
-
-    public StoryController()
-    {
-        this(  null );
-    }
-    
-    @Autowired
-    public StoryController( StoryRepository storyRepository )
-    {
-        this.storyRepository = storyRepository;
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger( StoryController.class );
     
     private Story put( Story story, HttpServletResponse httpServletResponse  ) throws IOException
     {
@@ -146,4 +136,34 @@ public class StoryController
         
         return story;
     }
+    
+//    @SubscribeMapping("/positions")
+//    public List<PortfolioPosition> getPositions(Principal principal) throws Exception
+//    {
+//        logger.debug("Positions for " + principal.getName());
+//        Portfolio portfolio = this.portfolioService.findPortfolio(principal.getName());
+//        return portfolio.getPositions();
+//    }
+//    
+//    @MessageMapping("/trade")
+//    public void executeTrade(Trade trade, Principal principal)
+//    {
+//        trade.setUsername(principal.getName());
+//        logger.debug("Trade: " + trade);
+//        this.tradeService.executeTrade(trade);
+//    }
+//    
+//    @MessageExceptionHandler
+//    @SendToUser("/queue/errors")
+//    public String handleException(Throwable exception)
+//    {
+//        return exception.getMessage();
+//    }
+    
+    @MessageMapping( "/subscribe/stories" )
+    @SendTo( "/topic/stories" )
+    public void subscribeToStoriesEvents( HelloMessage message ) throws Exception
+    {
+         return new Greeting("Hello, " + message.getName() + "!");
+   }
 }

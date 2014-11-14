@@ -1,4 +1,4 @@
-package org.vaneyk.rugby.data.domain.entity;
+package org.vaneyk.rugby.common.domain;
 
 import java.util.ArrayList;
 import java.util.List;

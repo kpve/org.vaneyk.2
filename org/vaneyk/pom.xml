@@ -18,6 +18,10 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     
+    <properties>
+        <project.root.dir>${basedir}</project.root.dir>
+    </properties>
+
     <modules>
         <module>parent</module>
         <module>commons</module>

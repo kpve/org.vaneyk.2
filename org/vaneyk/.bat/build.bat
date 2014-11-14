@@ -1,0 +1,4 @@
+@echo on
+
+mvn install 
+

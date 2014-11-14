@@ -11,24 +11,27 @@
         <groupId>org.vaneyk.rugby</groupId>
         <artifactId>vaneyk-rugby-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>./parent/pom.xml</relativePath>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>vaneyk-rugby-pom</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>vaneyk-rugby-common</artifactId>
+    <packaging>jar</packaging>
     
     <properties>
         <project.root.dir>${basedir}</project.root.dir>
     </properties>
-
-    <modules>
-        <module>parent</module>
-        <module>common</module>
-        <module>data</module>
-        <module>integration</module>
-        <module>service</module>
-        <module>web</module>
-        <module>mobile</module>
-        <module>tools</module>
-    </modules>
+    
+    <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vaneyk.commons</groupId>
+            <artifactId>vaneyk-commons-spring-data</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    
 </project>

@@ -1,6 +1,7 @@
 package org.vaneyk.rugby.web.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport;
@@ -9,25 +10,17 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration extends WebSocketMessageBrokerConfigurationSupport //implements WebSocketMessageBrokerConfigurer
 {
-
     @Override
-    protected void registerStompEndpoints( StompEndpointRegistry registry )
+    public void configureMessageBroker( MessageBrokerRegistry messageBrokerRegistry )
     {
-        // TODO Auto-generated method stub
-        
+        messageBrokerRegistry.setApplicationDestinationPrefixes( "/app" );
+        messageBrokerRegistry.enableSimpleBroker( "/queue", "/topic" );
     }
-//    @Override
-//    public void configureMessageBroker( MessageBrokerRegistry config )
-//    {
-//        config.setApplicationDestinationPrefixes( "/app" );
-//        config.enableSimpleBroker( "/queue", "/topic" );
-//    }
-//
-//    @Override
-//    public void registerStompEndpoints( StompEndpointRegistry registry )
-//    {
-//        registry.addEndpoint( "/portfolio" ).withSockJS();
-//    }
-
+    
+    @Override
+    protected void registerStompEndpoints( StompEndpointRegistry stompEndpointRegistry )
+    {
+        stompEndpointRegistry.addEndpoint( "/stories" ).withSockJS();        
+    }
 
 }

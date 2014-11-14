@@ -16,4 +16,9 @@
 
     <artifactId>vaneyk-rugby-service</artifactId>
     <packaging>jar</packaging>
+    
+    <properties>
+        <project.root.dir>${basedir}</project.root.dir>
+    </properties>
+
 </project>

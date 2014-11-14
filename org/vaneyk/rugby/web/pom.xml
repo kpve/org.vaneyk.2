@@ -62,9 +62,25 @@
             <artifactId>spring-messaging</artifactId>
             <version>4.0.8.RELEASE</version>
         </dependency>
+        <!-- required for non-spring message brokers (rabbitmq etc.) -->
+		<dependency>
+			<groupId>org.projectreactor</groupId>
+			<artifactId>reactor-net</artifactId>
+			<version>1.1.2.RELEASE</version>
+		</dependency>
         <dependency>
             <groupId>org.vaneyk.commons</groupId>
             <artifactId>vaneyk-commons-spring</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vaneyk.rugby</groupId>
+            <artifactId>vaneyk-rugby-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vaneyk.rugby</groupId>
+            <artifactId>vaneyk-rugby-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -131,7 +147,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.1.9.RELEASE</version>
                 <configuration>
-                    <mainClass>org.vaneyk.rugby.data.Application</mainClass>
+                    <mainClass>org.vaneyk.rugby.web.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>

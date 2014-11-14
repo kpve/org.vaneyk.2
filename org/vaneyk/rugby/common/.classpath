@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.vaneyk.commons"/>
+	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/jcl-over-slf4j-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-java-driver-2.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aop-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-data-commons-1.8.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-data-mongodb-1.5.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-expression-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-tx-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

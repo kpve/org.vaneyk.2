@@ -16,4 +16,9 @@
 
     <artifactId>vaneyk-rugby-mobile</artifactId>
     <packaging>jar</packaging>
+    
+    <properties>
+        <project.root.dir>${basedir}</project.root.dir>
+    </properties>
+
 </project>
