@@ -11,21 +11,18 @@
         <groupId>org.vaneyk.commons</groupId>
         <artifactId>vaneyk-commons-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>./parent/pom.xml</relativePath>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>vaneyk-commons-pom</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>vaneyk-commons-spring</artifactId>
+    <packaging>jar</packaging>
 
-    <properties>
-        <project.root.dir>${basedir}</project.root.dir>
-    </properties>
-    
-    <modules>
-        <module>parent</module>
-        <module>test</module>
-        <module>spring</module>
-        <module>spring-data</module>
-    </modules>
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.0.8.RELEASE</version>
+        </dependency>
+    </dependencies>
+
 </project>

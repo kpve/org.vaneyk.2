@@ -1,4 +1,4 @@
-package org.vaneyk.rugby.data.debug;
+package org.vaneyk.commons.spring.debug;
 
 import java.util.Arrays;
 
