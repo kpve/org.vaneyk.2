@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.vaneyk.commons.spring.debug.SpringDebugUtils;
@@ -12,6 +13,7 @@ import org.vaneyk.rugby.web.configuration.WebConfiguration;
 
 @Configuration
 @EnableAutoConfiguration
+@ComponentScan( value = { "org.vaneyk.rugby.web" } )
 @Import( WebConfiguration.class )
 public class Application
 {

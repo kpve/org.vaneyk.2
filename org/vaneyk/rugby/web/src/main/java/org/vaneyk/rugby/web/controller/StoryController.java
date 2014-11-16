@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import org.vaneyk.rugby.common.domain.Story;
 
 @Controller
+@RequestMapping( "/story" )
 public class StoryController
 {
     private static final Logger LOGGER = LoggerFactory.getLogger( StoryController.class );
@@ -33,7 +33,7 @@ public class StoryController
     public StoryController()
     {
         // TODO delete this hard code, replace with config property...
-        this( "http://localhost:8080/story/" );
+        this( "http://localhost:8010/story/" );
     }
     
     public StoryController( String rugbyDataStoryRestUrl )
@@ -56,6 +56,7 @@ public class StoryController
     {
         Story createdStory = null;
         
+TODO data api uses put!
         ResponseEntity<Story> responseEntity = this.restTemplate.postForEntity( this.rugbyDataStoryRestUrl, story, Story.class );
                               createdStory   = responseEntity.getBody();
         
