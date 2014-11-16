@@ -9,5 +9,21 @@
         <div ng-controller="HelloController" >
             <h2>Hello {{helloTo.title}} !</h2>
         </div>
+        
+        
+        <div ng-controller="storyController" >
+            <h2>Add A New Story</h2>
+            <textarea name="newStory" ng-model="newStory" >
+                TODO
+            </textarea>
+            <br/>
+            <input name="add" value="aaa" type="button" ng-click="storyFactory.add()" />
+            <hr />
+            <h2>List Of Stories</h2>
+            <div ng-repeat="story in listOfStories" >
+                {{story}}
+            </div>
+        </div>
+        
     </body>
 </html>  
