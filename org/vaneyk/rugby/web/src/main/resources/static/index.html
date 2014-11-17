@@ -20,7 +20,7 @@
             <input name="add" value="add" type="button" ng-click="storyController.addNewStory()" />
             <hr />
             <h2>List Of Stories</h2>
-            <div ng-repeat="story in listOfStories" >
+            <div ng-repeat="story in storyController.allStories" >
                 {{story}}
             </div>
         </div>

@@ -33,7 +33,7 @@ public class StoryController
         this.storyRepository = storyRepository;
     }
     
-    private Story put( Story story, HttpServletResponse httpServletResponse  ) throws IOException
+    private Story save( Story story, HttpServletResponse httpServletResponse  ) throws IOException
     {
         Story updatedStory = null;
         
@@ -49,22 +49,26 @@ public class StoryController
         return updatedStory;
     }
     
-    @RequestMapping( method   = RequestMethod.PUT,
+    @RequestMapping( method   = RequestMethod.POST,
                      consumes = MediaType.APPLICATION_JSON_VALUE,
                      produces = MediaType.APPLICATION_JSON_VALUE  )
     @ResponseBody
-    public Story create( @RequestBody Story story, HttpServletResponse httpServletResponse ) throws IOException
+    public Story post( @RequestBody Story story, HttpServletResponse httpServletResponse ) throws IOException
     {
         Story createdStory = null;
-        
-        Story existingStory = this.storyRepository.findOne( story.getId() );
-        if( existingStory != null )
+
+        if( story == null )
         {
-            httpServletResponse.sendError( HttpServletResponse.SC_CONFLICT );
+            httpServletResponse.sendError( HttpServletResponse.SC_BAD_REQUEST, "no content" );
+        }
+        else if( story.getId() != null )
+        {
+            httpServletResponse.sendError( HttpServletResponse.SC_BAD_REQUEST, "new stories are not allowed to have and id value" );            
         }
         else
         {
-            createdStory = this.put( story, httpServletResponse );
+            createdStory = this.save( story, httpServletResponse );
+            httpServletResponse.setStatus( HttpServletResponse.SC_CREATED );
         }
         
         return createdStory;
@@ -88,7 +92,7 @@ public class StoryController
         }
         else
         {
-            updatedStory = this.put( story, httpServletResponse );
+            updatedStory = this.save( story, httpServletResponse );
         }
         
         return updatedStory;

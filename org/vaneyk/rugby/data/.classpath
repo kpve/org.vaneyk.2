@@ -44,9 +44,9 @@
 	<classpathentry kind="lib" path="lib/spring-expression-4.0.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-test-4.0.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-tx-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-web-4.0.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-web-4.0.8.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-web/4.0.8.RELEASE/spring-web-4.0.8.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc-4.0.8.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat-embed-core-7.0.56.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-core-7.0.56.jar" sourcepath="C:/Users/ken/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/7.0.56/tomcat-embed-core-7.0.56-sources.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-embed-el-7.0.56.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-embed-logging-juli-7.0.56.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-embed-websocket-7.0.56.jar"/>

@@ -13,7 +13,7 @@
 	<classpathentry kind="lib" path="lib/spring-aop-3.2.10.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-aop/3.2.10.RELEASE/spring-aop-3.2.10.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-beans-3.2.10.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-beans/3.2.10.RELEASE/spring-beans-3.2.10.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-context-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-core-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-3.2.10.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/spring-core/3.2.10.RELEASE/spring-core-3.2.10.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-data-commons-1.8.4.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/data/spring-data-commons/1.8.4.RELEASE/spring-data-commons-1.8.4.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-data-mongodb-1.5.4.RELEASE.jar" sourcepath="C:/Users/ken/.m2/repository/org/springframework/data/spring-data-mongodb/1.5.4.RELEASE/spring-data-mongodb-1.5.4.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression-3.2.10.RELEASE.jar"/>
